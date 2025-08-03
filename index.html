@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Камінь, Ножиці, Папір</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      margin: 20px;
+    }
+
+    button {
+      padding: 15px 25px;
+      margin: 10px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #result, #score {
+      font-size: 20px;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Камінь, Ножиці, Папір</h1>
+
+  <div class="buttons">
+    <button onclick="play('Камінь')">Камінь</button>
+    <button onclick="play('Ножиці')">Ножиці</button>
+    <button onclick="play('Папір')">Папір</button>
+  </div>
+
+  <div id="result">Зробіть свій вибір!</div>
+  <div id="score">Рахунок: Ви - 0 | Комп'ютер - 0</div>
+
+  <script>
+    let userScore = 0;
+    let computerScore = 0;
+
+    function play(userChoice) {
+      const choices = ["Камінь", "Ножиці", "Папір"];
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+      let resultText = `Ви: ${userChoice} | Комп'ютер: ${computerChoice}<br>`;
+
+      if (userChoice === computerChoice) {
+        resultText += "Нічия!";
+      } else if (
+        (userChoice === "Камінь" && computerChoice === "Ножиці") ||
+        (userChoice === "Ножиці" && computerChoice === "Папір") ||
+        (userChoice === "Папір" && computerChoice === "Камінь")
+      ) {
+        userScore++;
+        resultText += "Ви виграли!";
+      } else {
+        computerScore++;
+        resultText += "Ви програли!";
+      }
+
+      document.getElementById("result").innerHTML = resultText;
+      document.getElementById("score").textContent =
+        `Рахунок: Ви - ${userScore} | Комп'ютер - ${computerScore}`;
+    }
+  </script>
+</body>
+</html>
